@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+  <style>
+    .browseheading {
+      /* top: 18px; */
+      /* background:var(--primary); */
+      color: white;
+      padding: 4.8rem 2rem;
+      text-align: center;
+          background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(workconnect-bg.jpg);
+    }
+    .search-bar {
+      padding: 1rem 2rem;
+      background: white;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .search-bar input, .search-bar select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      flex: 1;
+      min-width: 200px;
+    }
+    .jobs-container {
+      padding: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .job-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .job-card h3 {
+      margin-top: 0;
+    }
+    .job-card .meta {
+      color: gray;
+      font-size: 0.9rem;
+    }
+    .job-card .apply-btn {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background: #1e90ff;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+  </style>
+<body>
+
+
+<div class="browseheading">
+  <h1>Browse Jobs</h1>
+  <p>Find your next opportunity on WorkConnect</p>
+</div>
+
+<section class="search-bar">
+  <input type="text" placeholder="Search jobs by title, skill, or company...">
+  <select>
+    <option value="">Location</option>
+    <option value="remote">Remote</option>
+    <option value="nyc">New York</option>
+    <option value="sf">San Francisco</option>
+  </select>
+  <select>
+    <option value="">Category</option>
+    <option value="tech">Tech</option>
+    <option value="design">Design</option>
+    <option value="marketing">Marketing</option>
+  </select>
+</section>
+
+<section class="jobs-container">
+  <div class="job-card">
+    <h3>Frontend Developer</h3>
+    <div class="meta">Remote • Full-Time • $80k - $100k</div>
+    <p>Join our team to build cutting-edge interfaces using React and TypeScript.</p>
+    <a href="#" class="apply-btn">Apply Now</a>
+  </div>
+
+  <div class="job-card">
+    <h3>UI/UX Designer</h3>
+    <div class="meta">San Francisco • Contract • $50/hr</div>
+    <p>We're seeking a talented designer to enhance user experiences across web and mobile.</p>
+    <a href="#" class="apply-btn">Apply Now</a>
+  </div>
+
+    <div class="job-card">
+    <h3>Frontend Developer</h3>
+    <div class="meta">Remote • Full-Time • $80k - $100k</div>
+    <p>Join our team to build cutting-edge interfaces using React and TypeScript.</p>
+    <a href="#" class="apply-btn">Apply Now</a>
+  </div>
+
+  <div class="job-card">
+    <h3>UI/UX Designer</h3>
+    <div class="meta">San Francisco • Contract • $50/hr</div>
+    <p>We're seeking a talented designer to enhance user experiences across web and mobile.</p>
+    <a href="#" class="apply-btn">Apply Now</a>
+  </div>
+
+  <!-- More job cards can be added dynamically -->
+</section>
+
+{% endblock %}

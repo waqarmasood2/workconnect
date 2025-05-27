@@ -1,0 +1,607 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        :root {
+            /* --primary: #4f46e5; */
+             --primary: #33a6e4;
+            /* --primary-light: #6366f1; */
+            --primary-light: #1428e0;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #10b981;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: 1px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        /* Hero Section */
+        .page-hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #f9fafb 0%, #f0f4ff 100%);
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--primary);
+        }
+
+        .page-hero p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Tabs Navigation */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 2rem auto;
+            max-width: 800px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--gray);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Steps Section */
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            background: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .step-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .step-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 4rem 2rem;
+            background-color: #f9fafb;
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #000;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 450px;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 1.25rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .faq-question:hover {
+            background-color: #f9fafb;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background-color: white;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        /* footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .footer-links h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive Design */
+      /*  @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .page-hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tab-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .video-placeholder {
+                height: 250px;
+            }
+        } */
+    </style>
+
+<body>
+
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <h1>How WorkConnect Works</h1>
+        <p>Whether you're looking to hire top talent or find freelance work, our platform makes it simple and efficient</p>
+    </section>
+
+    <!-- Tabs Navigation -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="clients">For Clients</button>
+        <button class="tab-btn" data-tab="freelancers">For Freelancers</button>
+    </div>
+
+    <!-- Clients Tab Content -->
+    <div class="tab-content active" id="clients-tab">
+        <section class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>Post Your Project</h3>
+                <p>Create a detailed project description, set your budget, and outline your requirements. Our intuitive form makes it easy to get started.</p>
+                <a href="#" class="btn btn-outline">Learn More</a>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Review Proposals</h3>
+                <p>Receive competitive bids from qualified freelancers within hours. Compare profiles, portfolios, and reviews to find your perfect match.</p>
+                <a href="#" class="btn btn-outline">Learn More</a>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Hire & Collaborate</h3>
+                <p>Select your freelancer and use our platform to communicate, share files, and track progress. Pay securely when milestones are completed.</p>
+                <a href="#" class="btn btn-outline">Learn More</a>
+            </div>
+        </section>
+
+        <section class="video-section">
+            <h2>See WorkConnect in Action</h2>
+            <p>Watch how easy it is to find and hire top freelance talent</p>
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <i class="fas fa-play-circle" style="font-size: 3rem; color: var(--primary); margin-right: 1rem;"></i>
+                    Video Demonstration
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How much does it cost to hire through WorkConnect?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Posting projects and reviewing freelancer proposals is completely free. You only pay when you hire a freelancer, with our platform fee being just 3% of the project cost.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I ensure I'm hiring the right freelancer?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>All freelancers on WorkConnect are vetted through our verification process. You can review their portfolios, client feedback, and even conduct interviews before hiring.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What payment methods are supported?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We accept all major credit cards, PayPal, and bank transfers. Our secure payment system holds funds in escrow until work is completed to your satisfaction.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Freelancers Tab Content -->
+    <div class="tab-content" id="freelancers-tab">
+        <section class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3>Create Your Profile</h3>
+                <p>Showcase your skills, experience, and portfolio. The more complete your profile, the more likely you are to attract quality clients.</p>
+                <a href="#" class="btn btn-outline">Learn More</a>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-icon">
+                    <i class="fas fa-search-dollar"></i>
+                </div>
+                <h3>Find Projects</h3>
+                <p>Browse thousands of projects matching your skills. Set up alerts for new postings and save your favorite searches.</p>
+                <a href="#" class="btn btn-outline">Learn More</a>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Submit Proposals</h3>
+                <p>Submit competitive bids with your terms and timeline. Our proposal templates help you stand out from the competition.</p>
+                <a href="#" class="btn btn-outline">Learn More</a>
+            </div>
+        </section>
+
+        <section class="video-section">
+            <h2>Freelancer Success Stories</h2>
+            <p>See how professionals like you are building successful careers on WorkConnect</p>
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <i class="fas fa-play-circle" style="font-size: 3rem; color: var(--primary); margin-right: 1rem;"></i>
+                    Freelancer Testimonials
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Freelancer FAQs</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I get paid for my work?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>WorkConnect offers multiple payment options including direct bank transfer, PayPal, and Payoneer. Payments are released from escrow when clients approve your work.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What fees does WorkConnect charge?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We charge a 10% service fee on all completed projects. There are no membership fees or hidden charges.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How can I increase my chances of getting hired?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Complete your profile with a professional photo, detailed skills, and portfolio samples. Write personalized proposals and start with competitive rates to build your reputation.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to Get Started?</h2>
+        <p>Join thousands of clients and freelancers who are already benefiting from WorkConnect's platform.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+            <a href="signup.html" class="btn btn-primary" style="background-color: white; color: var(--primary);">Sign Up Free</a>
+            <a href="#" class="btn btn-outline" style="color: white; border-color: white;">Contact Sales</a>
+        </div>
+    </section>
+
+{% endblock %}

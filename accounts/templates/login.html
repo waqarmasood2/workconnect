@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | WorkConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            /* background-color: #f9fafb; */
+            background-color: #E4DFDA;
+            color: var(--dark);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Panel (Branding) */
+        .login-left {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .login-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .login-left h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-left p {
+            opacity: 0.9;
+            max-width: 400px;
+            margin-bottom: 2rem;
+        }
+
+        .login-features {
+            margin-top: 3rem;
+            text-align: left;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Right Panel (Login Form) */
+        .login-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .login-form-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .login-form-header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .login-form-header p {
+            color: var(--gray);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .divider::before {
+            margin-right: 1rem;
+        }
+
+        .divider::after {
+            margin-left: 1rem;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            color: var(--dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: #f8fafc;
+        }
+
+        .social-btn i {
+            margin-right: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .login-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: var(--error);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .login-left {
+                padding: 2rem 1.5rem;
+                display: none; /* Hide on mobile or adjust as needed */
+            }
+
+            .login-right {
+                padding: 2rem 1.5rem;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Panel (Branding) -->
+    <div class="login-left">
+        <div class="login-logo">
+            <i class="fas fa-handshake"></i>
+            <span>WorkConnect</span>
+        </div>
+        <h2>Welcome Back!</h2>
+        <p>Connect with top freelancers or find your next project opportunity</p>
+        
+        <div class="login-features">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div>
+                    <h4>Find Quality Work</h4>
+                    <p>Access thousands of projects matching your skills</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                    <h4>Secure Payments</h4>
+                    <p>Our escrow system ensures you get paid on time</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <div>
+                    <h4>Build Your Network</h4>
+                    <p>Connect with clients and freelancers worldwide</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel (Login Form) -->
+    <div class="login-right">
+        <div class="login-form-container">
+            <div class="login-form-header">
+                <h1>Sign in to your account</h1>
+                <p>Enter your credentials to access your dashboard</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <div class="input-group">
+                        <input type="email" id="email" class="form-control" placeholder="you@example.com" required>
+                        <div class="input-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    <div class="error-message" id="emailError">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                    <div class="error-message" id="passwordError">Password must be at least 8 characters</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+
+            <div class="divider">or continue with</div>
+
+            <div class="social-login">
+                <button type="button" class="social-btn">
+                    <i class="fab fa-google"></i>
+                    Google
+                </button>
+                <button type="button" class="social-btn">
+                    <i class="fab fa-linkedin-in"></i>
+                    LinkedIn
+                </button>
+            </div>
+
+            <div class="login-footer">
+                Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple form validation
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            
+            let isValid = true;
+            
+            // Reset errors
+            emailError.style.display = 'none';
+            passwordError.style.display = 'none';
+            
+            // Validate email
+            if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                emailError.style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate password
+            if (!password.value || password.value.length < 8) {
+                passwordError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Form is valid - submit to server
+                alert('Login successful! (This would submit to your backend in a real app)');
+                // window.location.href = 'dashboard.html';
+            }
+        });
+
+        // Toggle password visibility (bonus feature)
+        document.querySelector('.fa-lock').addEventListener('click', function() {
+            const password = document.getElementById('password');
+            const icon = this;
+            
+            if (password.type === 'password') {
+                password.type = 'text';
+                icon.classList.remove('fa-lock');
+                icon.classList.add('fa-unlock');
+            } else {
+                password.type = 'password';
+                icon.classList.remove('fa-unlock');
+                icon.classList.add('fa-lock');
+            }
+        });
+    </script>
+</body>
+</html>

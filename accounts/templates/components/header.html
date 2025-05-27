@@ -1,0 +1,19 @@
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="logo">
+                <i class="fas fa-handshake"></i>
+                <span>WorkConnect</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'forclients' %}" class="nav-link">For Clients</a>
+                <a href="{% url 'forfreelancer' %}" class="nav-link">For Freelancers</a>
+                <a href="{% url 'browsejob' %}" class="nav-link">Browse Jobs</a>
+                <a href="{% url 'howitworks' %}" class="nav-link">How It Works</a>
+            </div>
+            <div class="auth-buttons">
+                <a href="{% url 'login' %}" class="btn btn-outline">Log In</a>
+                <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </nav>
