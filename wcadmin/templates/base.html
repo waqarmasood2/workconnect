@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}WorkConnect Admin{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'wcadmin/css/adminmain.css' %}">
+    <link rel="stylesheet" href="{% static 'wcadmin/css/admintheme.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="wcadmin">
+    <div class="admin-container">
+        {% include 'wcadmin/includes/sidebar.html' %}
+        
+        <div class="main-content">
+            {% include 'wcadmin/includes/header.html' %}
+            
+            <div class="content-wrapper">
+                {% block content %}{% endblock %}
+            </div>
+            
+            {% include 'wcadmin/includes/footer.html' %}
+        </div>
+    </div>
+
+    <script src="{% static 'wcadmin/js/adminmain.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

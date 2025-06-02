@@ -1,0 +1,88 @@
+{% extends 'wcadmin/base.html' %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon bg-primary">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-info">
+                <h3>Total Users</h3>
+                <p>1,248</p>
+                <span class="stat-change up">+12%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon bg-success">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="stat-info">
+                <h3>Active Projects</h3>
+                <p>86</p>
+                <span class="stat-change up">+5%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon bg-warning">
+                <i class="fas fa-handshake"></i>
+            </div>
+            <div class="stat-info">
+                <h3>New Contracts</h3>
+                <p>32</p>
+                <span class="stat-change down">-3%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon bg-danger">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="stat-info">
+                <h3>Revenue</h3>
+                <p>$24,580</p>
+                <span class="stat-change up">+18%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="charts-row">
+        <div class="chart-card">
+            <h4>User Growth</h4>
+            <canvas id="usersChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <h4>Project Status</h4>
+            <canvas id="projectsChart"></canvas>
+        </div>
+    </div>
+
+    <div class="recent-activity">
+        <h4>Recent Activity</h4>
+        <div class="activity-list">
+            {% for activity in recent_activities %}
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-{{ activity.icon }}"></i>
+                </div>
+                <div class="activity-details">
+                    <p>{{ activity.message }}</p>
+                    <small>{{ activity.timestamp }}</small>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'wcadmin/js/admincharts.js' %}"></script>
+<script>
+    // Initialize charts
+    initUsersChart();
+    initProjectsChart();
+</script>
+{% endblock %}

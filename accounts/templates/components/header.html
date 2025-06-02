@@ -1,19 +1,43 @@
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="{% url 'home' %}" class="logo">
-                <i class="fas fa-handshake"></i>
-                <span>WorkConnect</span>
-            </a>
-            <div class="nav-links">
-                <a href="{% url 'forclients' %}" class="nav-link">For Clients</a>
-                <a href="{% url 'forfreelancer' %}" class="nav-link">For Freelancers</a>
-                <a href="{% url 'browsejob' %}" class="nav-link">Browse Jobs</a>
-                <a href="{% url 'howitworks' %}" class="nav-link">How It Works</a>
-            </div>
-            <div class="auth-buttons">
-                <a href="{% url 'login' %}" class="btn btn-outline">Log In</a>
-                <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
-            </div>
+<!-- Navigation -->
+<nav>
+    <div class="nav-container">
+        <a href="{% url 'home' %}" class="logo">
+            <i class="fas fa-handshake"></i>
+            <span>WorkConnect</span>
+        </a>
+        <div class="nav-links">
+            <a href="{% url 'forclients' %}" class="nav-link">For Clients</a>
+            <a href="{% url 'forfreelancer' %}" class="nav-link">For Freelancers</a>
+            <a href="{% url 'browsejob' %}" class="nav-link">Browse Jobs</a>
+            <a href="{% url 'howitworks' %}" class="nav-link">How It Works</a>
         </div>
-    </nav>
+        <div class="auth-buttons">
+            <a href="{% url 'login' %}" class="btn btn-outline">Log In</a>
+            <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                <i class="fa-regular fa-sun"></i>
+                <i class="fa-regular fa-moon"></i>
+            </button>
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</nav>
+<div class="mobile-menu">
+    <div class="mobile-menu-container">
+        <ul class="mobile-nav-links">
+            <li><a href="{% url 'forclients' %}" class="nav-link">For Clients</a></li>
+            <li><a href="{% url 'forfreelancer' %}" class="nav-link">For Freelancers</a></li>
+            <li><a href="{% url 'browsejob' %}" class="nav-link">Browse Jobs</a></li>
+            <li><a href="{% url 'howitworks' %}" class="nav-link">How It Works</a></li>
+        </ul>
+        <div class="mobile-auth-buttons">
+            <a href="{% url 'login' %}" class="btn btn-outline">Log In</a>
+            <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
+        </div>
+    </div>
+</div>
